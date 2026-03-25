@@ -21,14 +21,13 @@
 <nav class="navbar" id="navbar">
   <a href="index.html" class="logo">
     <div class="logo-box">R</div>
-    Robin<span style="color:var(--orange)">.</span>
+    Robinson<span style="color:var(--orange)">.</span>
   </a>
   <div class="nav-links">
     <a href="index.html">Accueil</a>
     <a href="about.html">À propos</a>
     <a href="creations.html">Créations</a>
     <a href="contact.html" class="nav-cta">Me contacter</a>
-    <button class="theme-toggle" id="themeBtn" aria-label="Changer le thème">🌙</button>
   </div>
   <div style="display:flex;gap:.8rem;align-items:center">
     <button class="theme-toggle" id="themeBtnMob" aria-label="Changer le thème">🌙</button>
