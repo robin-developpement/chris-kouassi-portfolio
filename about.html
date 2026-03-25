@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>À propos — Robin Becanti</title>
+  <script>(function(){ const t=localStorage.getItem('rb_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+  .page-hero {
+    padding:10rem 3.5rem 5rem; background:var(--bg2);
+    border-bottom:1px solid var(--border);
+    display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  .page-hero::after {
+    content:''; position:absolute; right:0; top:0; width:50%; height:100%;
+    background:radial-gradient(ellipse at 80% 50%, rgba(248,123,27,.1) 0%, transparent 70%);
+  }
+  .page-hero h1 { font-family:var(--font-display); font-size:clamp(3rem,6vw,5.5rem); font-weight:800; line-height:1; color:var(--text); }
+  .page-hero h1 em { font-style:italic; color:var(--orange); font-weight:600; }
+  .page-hero-r { z-index:1; }
+  .page-hero-r p { color:var(--text-muted); font-size:.95rem; line-height:1.8; margin-bottom:1.5rem; }
+
+  .about-body { display:grid; grid-template-columns:360px 1fr; gap:5rem; padding:5.5rem 3.5rem; align-items:start; }
+  .photo-col { position:sticky; top:7rem; }
+  .photo-wrap { position:relative; border-radius:16px; overflow:hidden; aspect-ratio:4/5; }
+  .photo-wrap img { width:100%; height:100%; object-fit:cover; object-position:top; filter:grayscale(15%); transition:filter .5s, transform .5s !important; }
+  .photo-wrap:hover img { filter:none; transform:scale(1.03); }
+  .photo-badge {
+    position:absolute; bottom:1.5rem; left:1.5rem;
+    background:var(--orange); border-radius:10px; padding:.9rem 1.3rem;
+    color:#fff;
+  }
+  .photo-badge .big { font-family:var(--font-display); font-size:1.8rem; font-weight:800; line-height:1; }
+  .photo-badge .sm { font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; margin-top:.2rem; }
+  .info-chips { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.5rem; }
+  .ich { padding:.4rem .9rem; border-radius:6px; background:var(--card-bg); border:1px solid var(--border); font-size:.78rem; color:var(--text-muted); font-family:var(--font-mono); transition:all .2s !important; }
+  .ich:hover { border-color:var(--orange); color:var(--orange); }
+
+  .content-col h2 { font-family:var(--font-display); font-size:1.7rem; font-weight:800; margin-bottom:1.2rem; color:var(--text); }
+  .content-col h2 em { font-style:italic; color:var(--orange); }
+  .bio { color:var(--text-muted); font-size:.95rem; line-height:1.8; margin-bottom:2.5rem; }
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2.5rem; }
+  .ig-item { background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; transition:border-color .2s !important; }
+  .ig-item:hover { border-color:var(--orange); }
+  .ig-label { font-family:var(--font-mono); font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--orange); margin-bottom:.35rem; }
+  .ig-val { font-size:.88rem; color:var(--text); line-height:1.5; }
+
+  .sg-title { font-family:var(--font-mono); font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.8rem; }
+  .sg { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:2rem; }
+  .stag { padding:.35rem .9rem; border-radius:6px; border:1.5px solid var(--border); font-size:.78rem; color:var(--text-muted); background:transparent; transition:all .2s !important; }
+  .stag:hover,.stag.hot { border-color:var(--orange); color:var(--orange); background:var(--badge-bg); }
+
+  /* Timeline */
+  .timeline-sec { background:var(--bg2); padding:5.5rem 3.5rem; border-top:1px solid var(--border); }
+  .tl-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 3rem; }
+  .tl-item { padding:2rem 0; border-top:1px solid var(--border); display:flex; gap:1.5rem; }
+  .tl-item:last-child { border-bottom:1px solid var(--border); }
+  .tl-dot-col { display:flex; flex-direction:column; align-items:center; padding-top:.3rem; }
+  .tl-dot { width:10px; height:10px; background:var(--orange); border-radius:50%; flex-shrink:0; }
+  .tl-dot-col::after { content:''; width:1px; flex:1; background:var(--border); margin-top:.5rem; }
+  .tl-item:last-child .tl-dot-col::after { display:none; }
+  .tl-date { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.08em; color:var(--orange); margin-bottom:.5rem; }
+  .tl-role { font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--text); margin-bottom:.25rem; }
+  .tl-co { font-size:.82rem; color:var(--text-muted); font-weight:500; margin-bottom:.6rem; }
+  .tl-desc { font-size:.84rem; color:var(--text-muted); line-height:1.65; }
+
+  .form-sec { padding:5.5rem 3.5rem; }
+  .form-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  .fcard { background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:2rem 1.5rem; transition:all .3s !important; border-top:3px solid var(--orange); }
+  .fcard:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+  .fyear { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.14em; color:var(--orange); margin-bottom:.8rem; }
+  .fdeg { font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--text); margin-bottom:.5rem; line-height:1.3; }
+  .fsch { font-size:.82rem; color:var(--text-muted); line-height:1.5; }
+
+  @media(max-width:1000px){
+    .page-hero { grid-template-columns:1fr; padding:8rem 1.5rem 3rem; gap:2rem; }
+    .about-body { grid-template-columns:1fr; padding:4rem 1.5rem; }
+    .photo-col { position:static; }
+    .tl-grid { grid-template-columns:1fr; }
+    .timeline-sec,.form-sec { padding:4rem 1.5rem; }
+    .form-cards { grid-template-columns:1fr; }
+    .info-grid { grid-template-columns:1fr; }
+  }
+  </style>
+</head>
+<body>
+<script src="assets/js/nav.js"></script>
+
+<section class="page-hero">
+  <div>
+    <div class="slabel reveal">À propos</div>
+    <h1 class="reveal" style="transition-delay:.1s">Kouassi<br>Chris Bah<br><em>Robin</em><br>Becanti.</h1>
+  </div>
+  <div class="page-hero-r reveal-right">
+    <p>Technicien supérieur en Réseaux Informatiques et Télécommunications, développeur web, graphiste et Digital Content Manager. Je combine compétences techniques et créativité pour concevoir des solutions digitales efficaces.</p>
+    <a href="contact.html" class="btn btn-orange">Me contacter →</a>
+  </div>
+</section>
+
+<section class="about-body">
+  <div class="photo-col reveal-left">
+    <div class="photo-wrap">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt="Robin Becanti"/>
+      <div class="photo-badge"><div class="big">5+</div><div class="sm">Années d'exp.</div></div>
+    </div>
+    <div class="info-chips">
+      <span class="ich">📍 Côte d'Ivoire</span>
+      <span class="ich">+225 07 67 88 88 70</span>
+      <span class="ich">🟢 Disponible</span>
+    </div>
+  </div>
+  <div class="content-col">
+    <h2 class="reveal">Créateur d'expériences <em>digitales</em></h2>
+    <p class="bio reveal" style="transition-delay:.1s">Passionné par la programmation, la création graphique et la communication numérique, je m'efforce d'approfondir continuellement mes connaissances afin de contribuer à des projets innovants dans l'univers du digital.</p>
+    <div class="info-grid reveal" style="transition-delay:.15s">
+      <div class="ig-item"><div class="ig-label">Téléphone</div><div class="ig-val">+225 07 67 88 88 70</div></div>
+      <div class="ig-item"><div class="ig-label">Email</div><div class="ig-val">robin.developpement@gmail.com</div></div>
+      <div class="ig-item"><div class="ig-label">Nationalité</div><div class="ig-val">Ivoirienne 🇨🇮</div></div>
+      <div class="ig-item"><div class="ig-label">Statut</div><div class="ig-val">Disponible ✅</div></div>
+      <div class="ig-item"><div class="ig-label">Langues</div><div class="ig-val">Français · Anglais (Lu, écrit, parlé)</div></div>
+      <div class="ig-item"><div class="ig-label">Qualités</div><div class="ig-val">Ponctuel · Esprit d'équipe · Dynamique</div></div>
+    </div>
+    <div class="sg-title reveal" style="transition-delay:.2s">Langages de programmation</div>
+    <div class="sg reveal" style="transition-delay:.22s">
+      <span class="stag hot">HTML</span><span class="stag hot">CSS</span><span class="stag hot">JavaScript</span><span class="stag hot">PHP</span><span class="stag hot">React JS</span><span class="stag hot">Next JS</span>
+    </div>
+    <div class="sg-title reveal" style="transition-delay:.24s">Compétences métier</div>
+    <div class="sg reveal" style="transition-delay:.26s">
+      <span class="stag">Conception de sites</span><span class="stag">Infographie</span><span class="stag">Montage vidéo</span><span class="stag">Digital Content Manager</span><span class="stag">Marketing Digital</span><span class="stag">SEO</span><span class="stag">Stream professionnel</span><span class="stag">Réseaux informatiques</span><span class="stag">Formateur</span><span class="stag">Conseiller client</span>
+    </div>
+    <div class="sg-title reveal" style="transition-delay:.28s">Systèmes</div>
+    <div class="sg reveal" style="transition-delay:.3s">
+      <span class="stag">Windows</span><span class="stag">Linux</span><span class="stag">macOS</span><span class="stag">Android</span><span class="stag">iOS</span><span class="stag">Pack Office</span>
+    </div>
+    <a href="contact.html" class="btn btn-orange reveal" style="transition-delay:.34s">Travailler ensemble →</a>
+  </div>
+</section>
+
+<section class="timeline-sec">
+  <div class="slabel reveal">Parcours professionnel</div>
+  <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:var(--text);margin-bottom:3rem" class="reveal" style="transition-delay:.1s">Expériences</h2>
+  <div class="tl-grid">
+    <div class="tl-item reveal"><div class="tl-dot-col"><div class="tl-dot"></div></div><div><div class="tl-date">Mars 2025 → Aujourd'hui</div><div class="tl-role">Responsable Communication Digitale</div><div class="tl-co">DISTRICOM Energies</div><div class="tl-desc">Gestion des plateformes numériques, conception de contenus visuels et audiovisuels, élaboration de stratégies social media, amélioration de la visibilité de la marque.</div></div></div>
+    <div class="tl-item reveal" style="transition-delay:.1s"><div class="tl-dot-col"><div class="tl-dot"></div></div><div><div class="tl-date">Juin 2024 → Oct. 2024</div><div class="tl-role">Infographe</div><div class="tl-co">Go'Babi — VTC Abidjan</div><div class="tl-desc">Conception d'affiches et de vidéos, charte graphique et UI design pour animer les réseaux sociaux de l'entreprise.</div></div></div>
+    <div class="tl-item reveal" style="transition-delay:.05s"><div class="tl-dot-col"><div class="tl-dot"></div></div><div><div class="tl-date">Fév. 2023 → Juin 2024</div><div class="tl-role">Correspondant Fichier / Mocinla</div><div class="tl-co">Yamoussoukro</div><div class="tl-desc">Médiateur entre le Ministère de l'Éducation et l'Établissement. Gestion du pointage des élèves.</div></div></div>
+    <div class="tl-item reveal" style="transition-delay:.15s"><div class="tl-dot-col"><div class="tl-dot"></div></div><div><div class="tl-date">Oct. 2021 → Oct. 2022</div><div class="tl-role">Corneur SAV</div><div class="tl-co">Orange CI — TKGS Agnib Lekro</div><div class="tl-desc">Diagnostic et résolution de problèmes équipements, gestion du parc informatique, accompagnement client sur les produits Orange.</div></div></div>
+    <div class="tl-item reveal" style="transition-delay:.1s"><div class="tl-dot-col"><div class="tl-dot"></div></div><div><div class="tl-date">Fév. 2021 → Juin 2021</div><div class="tl-role">Informaticien de gestion de stocks</div><div class="tl-co">Quincaillerie</div><div class="tl-desc">Gestion physique et informatique des marchandises via le logiciel de gestion SAARI.</div></div></div>
+  </div>
+</section>
+
+<section class="form-sec">
+  <div class="slabel reveal">Académique</div>
+  <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:var(--text);margin-bottom:2.5rem" class="reveal">Formations</h2>
+  <div class="form-cards">
+    <div class="fcard reveal"><div class="fyear">2018 — 2019</div><div class="fdeg">BTS Réseaux Informatiques & Télécommunications</div><div class="fsch">ISCAE — Institut Supérieure de Commerce et d'Administration des Entreprises, Yamoussoukro</div></div>
+    <div class="fcard reveal" style="transition-delay:.1s"><div class="fyear">2016 — 2017</div><div class="fdeg">Baccalauréat Scientifique Série D</div><div class="fsch">Lycée Moderne d'Abengourou — avec mention</div></div>
+    <div class="fcard reveal" style="transition-delay:.2s"><div class="fyear">2013 — 2014</div><div class="fdeg">BEPC — Brevet d'Étude du Premier Cycle</div><div class="fsch">Collège Moderne d'Abengourou</div></div>
+  </div>
+</section>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

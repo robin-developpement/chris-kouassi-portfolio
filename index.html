@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Robin Becanti — Webdesigner & Développeur</title>
+  <script>
+    /* Prevent flash of wrong theme */
+    (function(){ const t=localStorage.getItem('rb_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+  /* ======= HERO ======= */
+  .hero-z {
+    min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
+    background:var(--bg); position:relative; overflow:hidden; padding-top:5rem;
+  }
+  .hero-z::before {
+    content:''; position:absolute; right:-5%; top:0; width:55%; height:100%;
+    background:radial-gradient(ellipse at 70% 50%, rgba(248,123,27,.12) 0%, transparent 65%);
+    pointer-events:none;
+  }
+  .hero-left {
+    display:flex; flex-direction:column; justify-content:center;
+    padding:4rem 3.5rem; position:relative; z-index:2;
+  }
+  .hero-avail {
+    display:inline-flex; align-items:center; gap:.6rem;
+    padding:.35rem 1rem; border-radius:100px;
+    border:1.5px solid rgba(248,123,27,.4);
+    font-family:var(--font-mono); font-size:.68rem;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--orange);
+    margin-bottom:1.5rem; width:fit-content;
+  }
+  .hero-avail::before {
+    content:''; width:7px; height:7px; background:var(--orange);
+    border-radius:50%; animation:pulse 1.6s infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+  .hero-name {
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(3.2rem,6vw,6.5rem); line-height:.96;
+    color:var(--text); margin-bottom:.5rem;
+  }
+  .hero-name .dot { color:var(--orange); }
+  .obar { width:48px; height:4px; background:var(--orange); border-radius:2px; margin:1.2rem 0 1.5rem; }
+  .hero-tag { font-size:1rem; color:var(--text-muted); line-height:1.75; max-width:380px; margin-bottom:2rem; }
+  .hero-tag strong { color:var(--text); }
+  .socials { display:flex; gap:.8rem; margin-bottom:2.5rem; }
+  .sico {
+    width:38px; height:38px; border-radius:8px;
+    border:1.5px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-muted); font-size:.75rem; font-weight:700;
+    transition:all .2s !important;
+    font-family:var(--font-mono); background:var(--card-bg);
+  }
+  .sico:hover { border-color:var(--orange); color:var(--orange); }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+  .story-link {
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-size:.88rem; font-weight:600; color:var(--orange);
+    transition:gap .2s !important;
+  }
+  .story-link:hover { gap:.8rem; }
+
+  /* Right photo */
+  .hero-right { position:relative; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; }
+  .hero-right img { height:92%; width:auto; max-width:100%; object-fit:cover; object-position:top; position:relative; z-index:1; filter:grayscale(15%); transition:filter .5s !important; }
+  .hero-right:hover img { filter:grayscale(0%); }
+  .hero-right::before {
+    content:''; position:absolute; inset:0; z-index:2;
+    background:linear-gradient(to right, var(--bg) 0%, transparent 35%), linear-gradient(to top, var(--bg) 0%, transparent 30%);
+  }
+  .hero-right::after {
+    content:''; position:absolute; bottom:0; left:10%; right:10%; height:45%;
+    background:radial-gradient(ellipse at 50% 100%, rgba(248,123,27,.2) 0%, transparent 70%);
+  }
+  .hero-card {
+    position:absolute; top:2rem; right:2rem; z-index:4;
+    background:var(--card-bg); backdrop-filter:blur(12px);
+    border:1px solid var(--border); border-radius:12px;
+    padding:1.2rem 1.5rem; min-width:155px;
+  }
+  .hc-label { font-family:var(--font-mono); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.4rem; }
+  .hc-val { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--orange); }
+  .hero-stats {
+    position:absolute; bottom:1.5rem; left:50%; transform:translateX(-50%); z-index:4;
+    display:flex; gap:2rem;
+    background:var(--card-bg); backdrop-filter:blur(12px);
+    border:1px solid var(--border); border-radius:12px; padding:1.1rem 2.2rem;
+  }
+  .hstat span { display:block; font-family:var(--font-display); font-size:1.8rem; font-weight:800; color:var(--text); line-height:1; }
+  .hstat p { font-family:var(--font-mono); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); margin-top:.3rem; }
+
+  /* ======= INTRO ======= */
+  .intro-sec {
+    background:var(--bg2); padding:6rem 3.5rem;
+    display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+    border-top:1px solid var(--border);
+  }
+  .intro-quote {
+    font-family:var(--font-display); font-size:clamp(1.6rem,2.6vw,2.6rem);
+    font-weight:700; line-height:1.3; color:var(--text);
+  }
+  .intro-quote em { color:var(--orange); font-style:italic; }
+  .intro-r p { color:var(--text-muted); line-height:1.8; font-size:.95rem; margin-bottom:1rem; }
+  .stats-row { display:flex; gap:3rem; margin-top:1.8rem; }
+  .snum { font-family:var(--font-display); font-size:2.4rem; font-weight:800; color:var(--orange); line-height:1; }
+  .slbl2 { font-size:.7rem; color:var(--text-muted); letter-spacing:.08em; text-transform:uppercase; margin-top:.3rem; }
+  .cta-link { font-family:var(--font-mono); font-size:.82rem; color:var(--orange); display:inline-flex; align-items:center; gap:.4rem; transition:gap .2s !important; }
+  .cta-link:hover { gap:.7rem; }
+
+  /* ======= SERVICES ======= */
+  .services-sec { background:var(--bg); padding:6rem 3.5rem; border-top:1px solid var(--border); }
+  .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+  .svc-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:12px; padding:2rem 1.8rem;
+    transition:all .3s !important; position:relative; overflow:hidden;
+  }
+  .svc-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--orange); transform:scaleX(0); transform-origin:left;
+    transition:transform .35s !important;
+  }
+  .svc-card:hover { border-color:rgba(248,123,27,.4); transform:translateY(-6px); box-shadow:var(--shadow); }
+  .svc-card:hover::before { transform:scaleX(1); }
+  .svc-icon {
+    width:48px; height:48px; background:var(--badge-bg);
+    border-radius:10px; display:flex; align-items:center;
+    justify-content:center; font-size:1.3rem; margin-bottom:1.2rem;
+  }
+  .svc-n { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:.6rem; }
+  .svc-d { font-size:.86rem; color:var(--text-muted); line-height:1.6; }
+  .svc-count { margin-top:1.2rem; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; color:var(--orange); }
+  .svc-card.featured { background:var(--orange); border-color:var(--orange); }
+  .svc-card.featured::before { display:none; }
+  .svc-card.featured .svc-n,
+  .svc-card.featured .svc-d,
+  .svc-card.featured .svc-count { color:#fff; }
+  .svc-card.featured .svc-icon { background:rgba(255,255,255,.2); }
+
+  /* ======= CTA BAND ======= */
+  .cta-band {
+    background:var(--bg2); padding:4.5rem 3.5rem;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:2rem; flex-wrap:wrap; border-top:1px solid var(--border);
+  }
+  .cta-band h2 { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.8rem); font-weight:800; line-height:1.2; color:var(--text); }
+  .cta-band h2 em { font-style:italic; color:var(--orange); }
+  .cta-band p { color:var(--text-muted); font-size:.9rem; margin-top:.6rem; }
+
+  @media(max-width:1000px){
+    .hero-z { grid-template-columns:1fr; }
+    .hero-right { display:none; }
+    .hero-left { padding:8rem 1.5rem 4rem; }
+    .intro-sec { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
+    .services-sec { padding:4rem 1.5rem; }
+    .svc-grid { grid-template-columns:1fr 1fr; }
+    .cta-band { padding:3rem 1.5rem; flex-direction:column; align-items:flex-start; }
+  }
+  @media(max-width:600px){ .svc-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<script src="assets/js/nav.js"></script>
+
+<!-- HERO -->
+<section class="hero-z">
+  <div class="hero-left">
+    <div class="hero-avail reveal">Disponible pour projets</div>
+    <h1 class="hero-name reveal" style="transition-delay:.1s">Robin<br>Becanti<span class="dot">.</span></h1>
+    <div class="obar reveal" style="transition-delay:.15s"></div>
+    <p class="hero-tag reveal" style="transition-delay:.2s">
+      <strong>Développeur Web · Graphiste</strong><br>Digital Content Manager<br>basé en Côte d'Ivoire 🇨🇮
+    </p>
+    <div class="socials reveal" style="transition-delay:.25s">
+      <a href="mailto:robin.developpement@gmail.com" class="sico" title="Email">✉</a>
+      <a href="tel:+2250767888870" class="sico" title="Téléphone">☎</a>
+      <a href="about.html" class="sico" title="LinkedIn">in</a>
+    </div>
+    <div class="hero-btns reveal" style="transition-delay:.3s">
+      <a href="creations.html" class="btn btn-orange">Voir mes créations →</a>
+      <a href="about.html" class="story-link">Mon parcours →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="Robin Becanti"/>
+    <div class="hero-card"><div class="hc-label">Statut</div><div class="hc-val">Disponible 🟢</div></div>
+    <div class="hero-stats">
+      <div class="hstat"><span>5+</span><p>Années exp.</p></div>
+      <div class="hstat"><span>80+</span><p>Projets</p></div>
+      <div class="hstat"><span>98%</span><p>Satisfaction</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-sec">
+  <div class="reveal-left">
+    <div class="slabel">Introduction</div>
+    <h2 class="intro-quote">"La créativité ne s'épuise pas — plus vous en utilisez, <em>plus vous en avez.</em>"</h2>
+  </div>
+  <div class="intro-r reveal-right">
+    <p>Technicien supérieur en Réseaux Informatiques et Télécommunications, développeur web, graphiste et Digital Content Manager. Je combine compétences techniques et créativité pour concevoir des solutions digitales efficaces.</p>
+    <p>Passionné par la programmation, la création graphique et la communication numérique, je m'efforce d'approfondir continuellement mes connaissances afin de contribuer à des projets innovants.</p>
+    <div class="stats-row">
+      <div><div class="snum">14</div><div class="slbl2">Années de<br>formation</div></div>
+      <div><div class="snum">187</div><div class="slbl2">Clients<br>satisfaits</div></div>
+    </div>
+    <div style="margin-top:1.8rem"><a href="contact.html" class="cta-link">robin.developpement@gmail.com &nbsp;→</a></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-sec">
+  <div class="slabel reveal">Ce que je fais</div>
+  <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;color:var(--text)" class="reveal" style="transition-delay:.1s">Services &amp; Compétences</h2>
+  <div class="svc-grid">
+    <div class="svc-card featured reveal"><div class="svc-icon">🎨</div><div class="svc-n">Product Designer.</div><div class="svc-d">UI/UX, chartes graphiques, identités visuelles et affiches percutantes.</div><div class="svc-count">125+ Projets</div></div>
+    <div class="svc-card reveal" style="transition-delay:.1s"><div class="svc-icon">✏️</div><div class="svc-n">Branding Designer.</div><div class="svc-d">Conception d'identités de marque cohérentes et mémorables pour les entreprises.</div><div class="svc-count">37+ Projets</div></div>
+    <div class="svc-card reveal" style="transition-delay:.2s"><div class="svc-icon">💻</div><div class="svc-n">Full Stack Developer.</div><div class="svc-d">HTML, CSS, JS, PHP, React JS, Next JS — sites web performants et modernes.</div><div class="svc-count">42+ Projets</div></div>
+    <div class="svc-card reveal" style="transition-delay:.05s"><div class="svc-icon">📱</div><div class="svc-n">Digital Content Manager.</div><div class="svc-d">Stratégie et animation des réseaux sociaux, création de contenu engageant.</div><div class="svc-count">50+ Clients</div></div>
+    <div class="svc-card reveal" style="transition-delay:.15s"><div class="svc-icon">🎬</div><div class="svc-n">Montage Vidéo.</div><div class="svc-d">Conception et montage de contenus vidéo professionnels pour les plateformes.</div><div class="svc-count">30+ Vidéos</div></div>
+    <div class="svc-card reveal" style="transition-delay:.25s"><div class="svc-icon">🌐</div><div class="svc-n">Réseaux Informatiques.</div><div class="svc-d">Installation, maintenance de réseaux, gestion de parc informatique.</div><div class="svc-count">20+ Installations</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="reveal-left">
+    <h2>Vous avez un projet ?<br><em>Discutons-en.</em></h2>
+    <p>Toute demande de devis, collaboration ou question est la bienvenue.</p>
+  </div>
+  <a href="contact.html" class="btn btn-orange reveal-right" style="transition-delay:.2s">Démarrer un projet →</a>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+/* =============================================
+   ROBIN BECANTI — Portfolio
+   style.css — Dark / Light Theme
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+/* ─── ACCENT (constant) ─── */
+:root {
+  --orange:  #F87B1B;
+  --orange2: #d96b0e;
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Outfit', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+}
+
+/* ─── DARK THEME (default) ─── */
+[data-theme="dark"] {
+  --bg:          #11224E;
+  --bg2:         #0d1a3d;
+  --bg3:         #192f6a;
+  --card-bg:     rgba(25,47,106,0.4);
+  --text:        #FFFFFF;
+  --text-muted:  #8a9cc4;
+  --border:      rgba(255,255,255,0.08);
+  --navbar-bg:   rgba(11,18,45,0.95);
+  --shadow:      0 8px 40px rgba(0,0,0,0.4);
+  --input-bg:    rgba(25,47,106,0.5);
+  --badge-bg:    rgba(248,123,27,0.12);
+}
+
+/* ─── LIGHT THEME ─── */
+[data-theme="light"] {
+  --bg:          #f4f7ff;
+  --bg2:         #e8edf8;
+  --bg3:         #dde4f5;
+  --card-bg:     #ffffff;
+  --text:        #0d1a3d;
+  --text-muted:  #5a6e99;
+  --border:      rgba(17,34,78,0.1);
+  --navbar-bg:   rgba(244,247,255,0.95);
+  --shadow:      0 8px 40px rgba(17,34,78,0.1);
+  --input-bg:    #ffffff;
+  --badge-bg:    rgba(248,123,27,0.1);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+  transition: background .35s ease, color .35s ease;
+}
+
+img { display:block; max-width:100%; }
+a { text-decoration:none; color:inherit; }
+ul { list-style:none; }
+
+/* ─── Theme transition (smooth on all elements) ─── */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+}
+/* Override for transforms/opacity (should not be slowed by above) */
+.reveal,.reveal-left,.reveal-right,
+.btn,.card,.gcard,.svc-card,.ci-card,
+.tl-item,.fcard,.work-card {
+  transition: opacity .65s ease, transform .65s ease,
+              background-color .3s ease, border-color .3s ease,
+              color .3s ease;
+}
+
+/* ─── Cursor ─── */
+#cursor {
+  position:fixed; width:10px; height:10px;
+  background:var(--orange); border-radius:50%;
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .25s,height .25s !important;
+}
+#cursor-ring {
+  position:fixed; width:36px; height:36px;
+  border:1.5px solid rgba(248,123,27,.5); border-radius:50%;
+  pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:left .1s,top .1s,width .25s,height .25s !important;
+}
+body.chover #cursor  { width:18px; height:18px; }
+body.chover #cursor-ring { width:55px; height:55px; }
+
+/* ─── Navbar ─── */
+.navbar {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.4rem 3.5rem;
+  transition:all .4s !important;
+}
+.navbar.scrolled {
+  background:var(--navbar-bg);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:1rem 3.5rem;
+  box-shadow: var(--shadow);
+}
+.logo {
+  display:flex; align-items:center; gap:.7rem;
+  font-family:var(--font-display); font-weight:800; font-size:1.05rem;
+  color:var(--text);
+}
+.logo-box {
+  width:34px; height:34px; background:var(--orange);
+  border-radius:8px; display:flex; align-items:center;
+  justify-content:center; font-size:.9rem; font-weight:800;
+  color:#fff; flex-shrink:0;
+  transition:transform .2s !important;
+}
+.logo:hover .logo-box { transform:rotate(-8deg); }
+.nav-links { display:flex; align-items:center; gap:2.5rem; }
+.nav-links a {
+  font-size:.82rem; font-weight:500; color:var(--text-muted);
+  transition:color .2s !important; position:relative;
+}
+.nav-links a:hover,.nav-links a.active { color:var(--text); }
+.nav-links a.active::after {
+  content:''; position:absolute; bottom:-5px; left:0; right:0;
+  height:2px; background:var(--orange);
+}
+.nav-cta {
+  background:var(--orange); color:#fff !important;
+  padding:.55rem 1.5rem; border-radius:6px;
+  font-size:.8rem; font-weight:600;
+  transition:background .2s, transform .2s !important;
+}
+.nav-cta:hover { background:var(--orange2); transform:translateY(-2px); }
+
+/* Theme Toggle Button */
+.theme-toggle {
+  width:40px; height:40px; border-radius:10px;
+  border:1.5px solid var(--border); background:var(--card-bg);
+  color:var(--text); cursor:none;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; transition:border-color .2s, transform .2s !important;
+  margin-left:.5rem;
+}
+.theme-toggle:hover { border-color:var(--orange); transform:rotate(20deg); }
+
+/* Hamburger */
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:none; }
+.hamburger span { width:24px; height:2px; background:var(--text); border-radius:2px; transition:all .3s !important; }
+
+/* Mobile menu */
+.mobile-menu {
+  display:none; position:fixed; inset:0; background:var(--bg2);
+  z-index:499; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a { font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--text); }
+.mobile-menu a:hover { color:var(--orange); }
+.mobile-close { position:absolute; top:1.5rem; right:2rem; background:none; border:none; color:var(--text); font-size:2rem; cursor:none; }
+.mobile-theme { margin-top:1rem; }
+
+/* ─── Reveal ─── */
+.reveal,.reveal-left,.reveal-right { opacity:0; }
+.reveal { transform:translateY(30px); }
+.reveal-left { transform:translateX(-30px); }
+.reveal-right { transform:translateX(30px); }
+.reveal.v,.reveal-left.v,.reveal-right.v { opacity:1; transform:none; }
+
+/* ─── Buttons ─── */
+.btn {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.85rem 2rem; font-size:.85rem; font-weight:600;
+  cursor:none; border-radius:6px; border:none;
+}
+.btn:hover { transform:translateY(-3px); }
+.btn-orange { background:var(--orange); color:#fff; }
+.btn-orange:hover { background:var(--orange2); }
+.btn-outline { background:transparent; color:var(--text); border:1.5px solid var(--border); }
+.btn-outline:hover { border-color:var(--orange); color:var(--orange); }
+
+/* ─── Section label ─── */
+.slabel {
+  font-family:var(--font-mono); font-size:.68rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--orange);
+  display:flex; align-items:center; gap:.6rem; margin-bottom:1rem;
+}
+.slabel::before { content:'—'; }
+
+/* ─── Cards ─── */
+.card {
+  background:var(--card-bg); border:1px solid var(--border);
+  border-radius:12px; padding:2rem 1.8rem;
+  box-shadow: var(--shadow);
+}
+.card:hover { border-color:var(--orange); transform:translateY(-4px); }
+
+/* ─── Marquee ─── */
+.marquee-wrap {
+  overflow:hidden; background:var(--bg2);
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:.75rem 0;
+}
+.marquee-track { display:flex; gap:2.5rem; white-space:nowrap; animation:mq 22s linear infinite; }
+@keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.mitem { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); }
+.mdot  { color:var(--orange); font-size:.8rem; }
+
+/* ─── Footer ─── */
+footer {
+  background:var(--bg2); border-top:1px solid var(--border);
+  padding:2rem 3.5rem; display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:1rem;
+}
+.fcopy { font-family:var(--font-mono); font-size:.7rem; color:var(--text-muted); }
+.flinks { display:flex; gap:2rem; }
+.flinks a { font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); font-weight:500; }
+.flinks a:hover { color:var(--orange); }
+
+/* ─── Responsive ─── */
+@media(max-width:900px){
+  .navbar,.navbar.scrolled { padding:1.2rem 1.5rem; }
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  footer { padding:1.5rem; }
+}
